@@ -6,12 +6,15 @@ be triggered from a build passing, making for easy deploys.
 
 # Getting Started
 
-MC is built using Sinatra and has minimal dependencies. You can define a webhook to listen in `events.yml` like:
+MC is built using Sinatra and has minimal dependencies. You can define a
+webhook to listen in `events.yml` like:
 
 ```
-- event: Deploy Example
+example_app_deploy_event:
+  endpoint: /example_app/deploy
+  event: Deploy Example
   responsiblities:
-    - name: Deploy
+    - task_name: Deploy
       repo: git://agundy/example.git
       playbook: ./deploys/deploy.yml
   closing:
@@ -19,3 +22,9 @@ MC is built using Sinatra and has minimal dependencies. You can define a webhook
       url: https://deploy.agundy.com
 
 ```
+
+# What is an event?
+
+After a build finishes automated deploys, more tests or more builds can be
+triggered. Events organize it all, run scripts, log results, and can even
+trigger more webhooks.
